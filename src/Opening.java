@@ -28,7 +28,9 @@ public class Opening extends JFrame{
 		start.addActionListener(
 				new ActionListener(){
 					public void actionPerformed(ActionEvent e) {
-						startmain.filecheck();
+						startmain.openFile();
+						startmain.readFile();
+						startmain.closeFile();
 					}				
 				}
 		);
