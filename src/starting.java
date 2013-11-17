@@ -1,23 +1,19 @@
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 public class starting {
 
 	private String file = "eng.txt";
 	private String direction = "Vocabulary";
-	public void filecreate(){
+	public void filecheck(){
 		File f = new File(direction , file);
 		if(f.exists()){
-			System.out.println("文件名：" + f.getAbsolutePath());
-            System.out.println("檔案長度：" + f.length());
+			
 		}
 		else{
-			f.getParentFile().mkdir();
-			try{
-				f.createNewFile();
-			}catch(IOException e){
-				e.printStackTrace();
-			}
+			JOptionPane.showMessageDialog(null, "No vocabulary");
 		}
 	}
 }

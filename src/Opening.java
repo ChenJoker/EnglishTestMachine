@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class Opening extends JFrame{
 	
@@ -9,11 +10,13 @@ public class Opening extends JFrame{
 	private JButton quit;
 	private JPanel screen;
 	private starting startmain;
+	private enterword ewmain;
+	
 	public Opening(){
 		super("English Test Machine");
 				
 		startmain = new starting();
-		
+		ewmain = new enterword();
 		screen = new JPanel();
 		screen.setLayout(null);
 		screen.setPreferredSize(new Dimension(500,800));
@@ -22,6 +25,13 @@ public class Opening extends JFrame{
 		start.setLocation(100,100);
 		start.setSize(300, 100);
 		start.setFont(new Font("Serif" , Font.BOLD,30));
+		start.addActionListener(
+				new ActionListener(){
+					public void actionPerformed(ActionEvent e) {
+						startmain.filecheck();
+					}				
+				}
+		);
 		
 		enter = new JButton("Enter words");
 		enter.setLocation(100, 300);
@@ -30,7 +40,11 @@ public class Opening extends JFrame{
 		enter.addActionListener(
 				new ActionListener(){
 					public void actionPerformed(ActionEvent e) {
-						startmain.filecreate();
+						try {
+							ewmain.filecreate();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
 					}				
 				}
 		);
