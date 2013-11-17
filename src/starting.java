@@ -16,8 +16,7 @@ public class starting {
 		try{
 			input = new Scanner(new File("Vocabulary\\eng.txt"));
 		}catch(FileNotFoundException fnfe){
-			System.err.println("Error openint file");
-			System.exit(1);
+			JOptionPane.showMessageDialog(null, "No file here");
 		}
 	}
 	
@@ -36,22 +35,24 @@ public class starting {
 		engList = new ArrayList<String>();
 		chiList = new ArrayList<String>();
 		
-		try{
-			while(input.hasNext()){
-				engList.add(input.next());
-				chiList.add(input.next());
+		if(input!=null){
+			try{
+				while(input.hasNext()){
+					engList.add(input.next());
+					chiList.add(input.next());
+				}
+			}catch(NoSuchElementException nsee){
+				System.err.println("File improperly formed.");
+				input.close();
+				System.exit(1);
+			}catch(IllegalStateException ise){
+				System.err.println("Error reading from file.");
+				System.exit(1);
 			}
-		}catch(NoSuchElementException nsee){
-			System.err.println("File improperly formed.");
-			input.close();
-			System.exit(1);
-		}catch(IllegalStateException ise){
-			System.err.println("Error reading from file.");
-			System.exit(1);
-		}
-		
-		for(int i = 0 ; i <engList.size() ; i++){
-			System.out.println(engList.get(i)+"\t"+chiList.get(i));
+			
+			for(int i = 0 ; i <engList.size() ; i++){
+				System.out.println(engList.get(i)+"\t"+chiList.get(i));
+			}
 		}
 	}
 }
