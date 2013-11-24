@@ -70,10 +70,10 @@ public class enterword {
 			Scanner input = new Scanner(System.in);
 			String english;
 			String chinese;
-			english = JOptionPane.showInputDialog("Enter english");
-			chinese = JOptionPane.showInputDialog("Enter chinese"); 
+			english = JOptionPane.showInputDialog("Enter English");
+			chinese = JOptionPane.showInputDialog("Enter Chinese"); 
 			bw.write(english);
-			bw.write(" ");
+			bw.write("\t");
 			bw.write(chinese);
 			bw.write("\n");
 			bw.flush(); // if use buffer , flush is needed

@@ -5,16 +5,18 @@ import javax.swing.JOptionPane;
 
 public class starting {
 
-	private Scanner input;
+	private BufferedReader input;
 	private List<String> engList;
 	private List<String> chiList;
+	private String temp;
+	private String[] separate;
 	
 	/*
 	 * open file to read
 	 */
 	public void openFile(){
 		try{
-			input = new Scanner(new File("Vocabulary\\eng.txt"));
+			input = new BufferedReader(new InputStreamReader(new FileInputStream("Vocabulary\\eng.txt")));
 		}catch(FileNotFoundException fnfe){
 			JOptionPane.showMessageDialog(null, "No file here");
 		}
@@ -23,7 +25,7 @@ public class starting {
 	/*
 	 * close file
 	 */
-	public void closeFile(){
+	public void closeFile() throws IOException{
 		if(input!=null)
 			input.close();
 	}
@@ -31,15 +33,17 @@ public class starting {
 	/*
 	 * reading vocabulary from file
 	 */
-	public void readFile(){
+	public void readFile() throws IOException{
 		engList = new ArrayList<String>();
 		chiList = new ArrayList<String>();
 		
 		if(input!=null){
 			try{
-				while(input.hasNext()){
-					engList.add(input.next());
-					chiList.add(input.next());
+				//split string into english and chinese
+				while((temp = input.readLine()) != null){
+					separate = temp.split("\\t");
+					engList.add(separate[0]);
+					chiList.add(separate[separate.length-1]);
 				}
 			}catch(NoSuchElementException nsee){
 				System.err.println("File improperly formed.");

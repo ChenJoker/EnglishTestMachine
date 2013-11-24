@@ -29,8 +29,16 @@ public class Opening extends JFrame{
 				new ActionListener(){
 					public void actionPerformed(ActionEvent e) {
 						startmain.openFile();
-						startmain.readFile();
-						startmain.closeFile();
+						try {
+							startmain.readFile();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+						try {
+							startmain.closeFile();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
 					}				
 				}
 		);
